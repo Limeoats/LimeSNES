@@ -3,6 +3,8 @@ package com.limeoats.limesnes;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,7 +25,7 @@ public class LimeSNES extends ApplicationAdapter {
 	private SpriteBatch _batch;
 
 	private Texture _controller;
-	private List<Dot> _dots = new ArrayList<>();
+	private List<Dot> _dots = new ArrayList<Dot>();
 	
 	@Override
 	public void create () {
@@ -48,18 +50,20 @@ public class LimeSNES extends ApplicationAdapter {
 	}
 
 	private void update() {
-		this._dots.get(ControllerMapping.A.getValue()).setVisible(Gdx.input.isKeyPressed(Input.Keys.A));
-		this._dots.get(ControllerMapping.B.getValue()).setVisible(Gdx.input.isKeyPressed(Input.Keys.B));
-		this._dots.get(ControllerMapping.X.getValue()).setVisible(Gdx.input.isKeyPressed(Input.Keys.X));
-		this._dots.get(ControllerMapping.Y.getValue()).setVisible(Gdx.input.isKeyPressed(Input.Keys.Y));
-		this._dots.get(ControllerMapping.L.getValue()).setVisible(Gdx.input.isKeyPressed(Input.Keys.L));
-		this._dots.get(ControllerMapping.R.getValue()).setVisible(Gdx.input.isKeyPressed(Input.Keys.R));
-		this._dots.get(ControllerMapping.Select.getValue()).setVisible(Gdx.input.isKeyPressed(Input.Keys.S));
-		this._dots.get(ControllerMapping.Start.getValue()).setVisible(Gdx.input.isKeyPressed(Input.Keys.D));
-		this._dots.get(ControllerMapping.DpadRight.getValue()).setVisible(Gdx.input.isKeyPressed(Input.Keys.RIGHT));
-		this._dots.get(ControllerMapping.DpadDown.getValue()).setVisible(Gdx.input.isKeyPressed(Input.Keys.DOWN));
-		this._dots.get(ControllerMapping.DpadLeft.getValue()).setVisible(Gdx.input.isKeyPressed(Input.Keys.LEFT));
-		this._dots.get(ControllerMapping.DpadUp.getValue()).setVisible(Gdx.input.isKeyPressed(Input.Keys.UP));
+		Controller c = Controllers.getControllers().first();
+		System.out.println("left: " + c.getAxis(0));
+		this._dots.get(ControllerMapping.A.getValue()).setVisible(c.getButton(1));
+		this._dots.get(ControllerMapping.B.getValue()).setVisible(c.getButton(2));
+		this._dots.get(ControllerMapping.X.getValue()).setVisible(c.getButton(0));
+		this._dots.get(ControllerMapping.Y.getValue()).setVisible(c.getButton(3));
+		this._dots.get(ControllerMapping.L.getValue()).setVisible(c.getButton(4));
+		this._dots.get(ControllerMapping.R.getValue()).setVisible(c.getButton(6));
+		this._dots.get(ControllerMapping.Select.getValue()).setVisible(c.getButton(8));
+		this._dots.get(ControllerMapping.Start.getValue()).setVisible(c.getButton(9));
+		this._dots.get(ControllerMapping.DpadRight.getValue()).setVisible(c.getAxis(0) >= 1);
+		this._dots.get(ControllerMapping.DpadDown.getValue()).setVisible(c.getAxis(1) >= 1);
+		this._dots.get(ControllerMapping.DpadLeft.getValue()).setVisible(c.getAxis(0) <= -0.999);
+		this._dots.get(ControllerMapping.DpadUp.getValue()).setVisible(c.getAxis(1) <= -0.999);
 	}
 
 	private void draw() {

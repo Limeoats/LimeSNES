@@ -36,7 +36,7 @@ public class LimeSNES extends ApplicationAdapter {
 			this._dots.add(new Dot(new Vector2(0, 0), new Vector2(1.0f, 1.0f)));
 		}
 		this._dots.get(ControllerMapping.X.getValue()).setProperties(new Vector2(842, 308), new Vector2(0.6f, 0.6f));
-		this._dots.get(ControllerMapping.A.getValue()).setProperties(new Vector2(952, 226), new Vector2(0.6f, 0.6f));
+		this._dots.get(ControllerMapping.A.getValue()).setProperties(new Vector2(950, 224), new Vector2(0.6f, 0.6f));
 		this._dots.get(ControllerMapping.B.getValue()).setProperties(new Vector2(845, 140), new Vector2(0.6f, 0.6f));
 		this._dots.get(ControllerMapping.Y.getValue()).setProperties(new Vector2(738, 224), new Vector2(0.6f, 0.6f));
 		this._dots.get(ControllerMapping.L.getValue()).setProperties(new Vector2(200, 454), new Vector2(2.0f, 0.3f));
@@ -51,7 +51,6 @@ public class LimeSNES extends ApplicationAdapter {
 
 	private void update() {
 		Controller c = Controllers.getControllers().first();
-		System.out.println("left: " + c.getAxis(0));
 		this._dots.get(ControllerMapping.A.getValue()).setVisible(c.getButton(1));
 		this._dots.get(ControllerMapping.B.getValue()).setVisible(c.getButton(2));
 		this._dots.get(ControllerMapping.X.getValue()).setVisible(c.getButton(0));
